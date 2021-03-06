@@ -63,7 +63,7 @@ export default class Job {
     }
 
     
-    set index(title, company) {
+    setIndex(title, company) {
         // No extra validation needed here, since the index is generated here.
         this.index = generateIndex(title, company);
     }
@@ -72,21 +72,21 @@ export default class Job {
         return this.timeCreated;
     }
 
-    set timeCreated(newTime) {
+    setTimeCreated(newTime) {
         this.timeCreated = generateTimestamp();
     }
 
     get timeEdited() {
         return this.timeEdited;
     }
-    set timeEdited(newTime) {
+    setTimeEdited(newTime) {
         this.timeEdited = generateTimestamp();
     }
 
     get title() {
         return this.title;
     }
-    set title(title) {
+    setTitle(title) {
         try {
             validateTitle(title);
             this.title = title;
@@ -97,7 +97,7 @@ export default class Job {
     get company() {
         return this.company;
     }
-    set company(company) {
+    setCompany(company) {
         try {
             validateCompany(company);
             this.company = company;
@@ -108,7 +108,7 @@ export default class Job {
     get salaryMin() {
         return this.salaryMin;
     }
-    set salaryMin(salaryMin) {
+    setSalaryMin(salaryMin) {
         try {
             validateSalaryMin(salaryMin);
             this.salaryMin = salaryMin;
@@ -119,7 +119,7 @@ export default class Job {
     get salaryMax() {
         return this.salaryMax;
     }
-    set salaryMax(salaryMax) {
+    setSalaryMax(salaryMax) {
         try {
             validateSalaryMax(salaryMax);
             this.salaryMax = salaryMax;
@@ -130,7 +130,7 @@ export default class Job {
     get description(description) {
         return description;
     }
-    set description(description) {
+    setDescription(description) {
         try {
             validateDescription(description);
             this.description = description;
@@ -142,7 +142,7 @@ export default class Job {
     get experienceLevel() {
         return this.experienceLevel;
     }
-    set experienceLevel(experienceLevel) {
+    setExperienceLevel(experienceLevel) {
         try {
             validateExperienceLevel(experienceLevel, EXP_LEVEL_LIST);
         } catch (err) {
@@ -152,7 +152,7 @@ export default class Job {
     get tech() {
         return this.tech;
     }
-    set tech(tech) {
+    setTech(tech) {
         try {
             validateTech(tech, TECH_LIST);
             this.tech = tech;
@@ -163,7 +163,7 @@ export default class Job {
     get applied() {
         return this.applied;
     }
-    set applied(applied) {
+    setApplied(applied) {
         try {
             validateApplied(applied);
             this.applied = applied;
@@ -174,7 +174,7 @@ export default class Job {
     get interviewCount() {
         return this.interviewCount;
     }
-    set interviewCount(interviewCount) {
+    setInterviewCount(interviewCount) {
         try {
             validateInterviewCount(interviewCount);
             this.interviewCount = interviewCount;
@@ -185,7 +185,7 @@ export default class Job {
     get easyApply() {
         return this.easyApply;
     }
-    set easyApply(easyApply) {
+    setEasyApply(easyApply) {
         try {
             validateEasyApply(easyApply);
             this.easyApply = easyApply;
@@ -196,7 +196,7 @@ export default class Job {
     get requiresPreInterviewTest() {
         return this.requiresPreInterviewTest;
     }
-    set requiresPreInterviewTest(requiresPreInterviewTest) {
+    setRequiresPreInterviewTest(requiresPreInterviewTest) {
         try {
             validateRequiresPreInterviewTest(requiresPreInterviewTest);
             this.requiresPreInterviewTest = requiresPreInterviewTest;
@@ -207,7 +207,7 @@ export default class Job {
     get requiresHomework() {
         return this.requiresHomework;
     }
-    set requiresHomework(requiresHomework) {
+    setRequiresHomework(requiresHomework) {
         try {
             validateRequiresHomework(requiresHomework);
             this.requiresHomework = requiresHomework;
