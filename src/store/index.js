@@ -31,8 +31,8 @@ export default new Vuex.Store({
     message: ""
   },
   mutations: {
-    saveJob(state, payload) {
-      state.jobs.push(payload);
+    saveJob(state, job) {
+      state.jobs.push(job);
     },
     setJobs(state, jobs) {
       state.jobs = jobs;
@@ -69,8 +69,7 @@ export default new Vuex.Store({
     }, newJob) {
       try {
         const job = new Job(newJob);
-        job.timeCreated = 
-        job['timeCreated'] = timestamp;
+        job.setTimeCreated();
         commit("saveJob", job);
         create(null, job);
       } catch (err) {
@@ -82,11 +81,11 @@ export default new Vuex.Store({
       commit,
       dispatch,
       state
-    }, job) {
-      const timestamp = generateTimestamp();
-      job['timeEdited'] = timestamp;
+    }, newJob) {
+      const job = new Job(job);
+      job.setTimeEdited();
       try {
-        await update(job.index, job);
+        await update(job.index, job.toObject());
         dispatch('getAllJobs');
       } catch (err) {
         dispatch('saveError', err);
@@ -96,6 +95,7 @@ export default new Vuex.Store({
       commit
     }) {
       const jobs = await all();
+      jobs.map(job => new Job(job));
       commit('setJobs', jobs);
     },
     async setActiveJob({
