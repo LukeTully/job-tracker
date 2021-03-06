@@ -11,10 +11,8 @@ import {
 import {
   generateTimestamp
 } from "../utilities";
-import error from "../services/errors";
-import {
-  Job
-} from "../models";
+import {error, errorSavingJob } from "../services/errors";
+import Job from "../models/JobModel.js";
 
 Vue.use(Vuex);
 
@@ -30,7 +28,7 @@ export default new Vuex.Store({
   state: {
     jobs: [],
     currentJob: {},
-    message: "toaster"
+    message: ""
   },
   mutations: {
     saveJob(state, payload) {
@@ -41,6 +39,9 @@ export default new Vuex.Store({
     },
     activeJob(state, job) {
       state.currentJob = job;
+    },
+    error(state, err) {
+      state.message = err.message;
     }
   },
   actions: {
@@ -73,7 +74,7 @@ export default new Vuex.Store({
         commit("saveJob", job);
         create(null, job);
       } catch (err) {
-        error(err);
+        dispatch('saveError', err);
       }
 
     },
@@ -88,7 +89,7 @@ export default new Vuex.Store({
         await update(job.index, job);
         dispatch('getAllJobs');
       } catch (err) {
-        error(err);
+        dispatch('saveError', err);
       }
     },
     async getAllJobs({
@@ -102,8 +103,11 @@ export default new Vuex.Store({
     }, id) {
       const job = await read(id);
       commit("activeJob", job);
+    },
+    saveError({ commit }, err) {
+      commit('error');
+      errorSavingJob(err);
     }
-
   },
   modules: {},
 });
