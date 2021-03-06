@@ -1,0 +1,57 @@
+[
+  {
+    "title": "Senior JS Developer",
+    "company": "Webrenos inc.",
+    "salary": [
+      null,
+      null
+    ],
+    "description": "
+
+        Sage Recruiting is looking for a Senior Frontend JavaScript Software Engineer to join the team of a dynamic company based out of beautiful Vancouver, BC! You will be working with a small team of innovators who are working towards cracking the code in highly regulated industries such as banking & insurance. This team is not satisfied with the status quo in most regulatory industries and is working on changing things. Security is their holy grail, and privacy is their corner store!
+        
+        
+        We're looking for someone that has solid JavaScript and TypeScript coding experience using modern frameworks like React and Redux. Your primary focus will be on developing user-facing components and implementing them following well-known React.js workflows. You will ensure that these components and the overall application are robust and are easy to maintain. This is an incredible opportunity to scale up your career with an extremely driven team located in Gastown, Vancouver!
+        
+         
+        
+        What we are looking for: 
+        
+            At least 5 years of JavaScript software development experience
+            Experience working in an agile development environment
+            A concrete understanding of React.js
+            Expertise with TypeScript
+            Experience with WebPack
+            Code samples or a GitHub portfolio is preferred
+            Experience with node.js is nice to have
+            Experience building reusable components and front-end libraries for future use
+            Ability to translate designs and wireframes into high-quality code
+            Experience with backend programming or DevOps is nice to have (but we are okay with 100% frontend folks as well!) 
+        
+        
+        
+        What we offer: 
+        
+            Competitive salary, vacation, and benefits
+            Equity
+            Remote work (but we also have a renovated two-story office in Gastown Vancouver with a rooftop patio)
+            Ability to be challenged and work with some of the best in the industry!
+        
+         
+        
+        Please apply with your resume and GitHub profile or code samples. GitHub is not required but will get you to the top of the list!
+        
+        
+        Salary is commensurate with experience. Only qualified candidates will be contacted. Thank you to all of the applicants! 
+        ",
+    "experienceLevel": "Senior",
+    "tech": [
+      "TypeScript",
+      "JavaScript",
+      "Webpack",
+      "React.js",
+      "Node.js",
+      "Redux"
+    ]
+  }
+]
