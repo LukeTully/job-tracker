@@ -1,5 +1,6 @@
 import {
-    generateIndex, generateTimestamp
+    generateIndex,
+    generateTimestamp
 } from "../utilities";
 import {
     validateIndex,
@@ -62,7 +63,7 @@ export default class Job {
         return this.index;
     }
 
-    
+
     setIndex(title, company) {
         // No extra validation needed here, since the index is generated here.
         this.index = generateIndex(title, company);
@@ -72,14 +73,14 @@ export default class Job {
         return this.timeCreated;
     }
 
-    setTimeCreated(newTime) {
+    setTimeCreated() {
         this.timeCreated = generateTimestamp();
     }
 
     get timeEdited() {
         return this.timeEdited;
     }
-    setTimeEdited(newTime) {
+    setTimeEdited() {
         this.timeEdited = generateTimestamp();
     }
 
