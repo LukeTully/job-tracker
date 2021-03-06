@@ -215,4 +215,23 @@ export default class Job {
             error(err);
         }
     }
+    toObject() {
+        return {
+            index: this.index,
+            title: this.title,
+            company: this.company,
+            salaryMin: this.salaryMin,
+            salaryMax: this.salaryMax,
+            description: this.description,
+            experienceLevel: this.experienceLevel,
+            tech: this.tech,
+            applied: this.applied,
+            interviewCount: this.interviewCount,
+            easyApply: this.easyApply,
+            requiresPreInterviewTest: this.requiresPreInterviewTest,
+            requiresHomework: this.requiresHomework,
+            timeEdited: this.timeEdited,
+            timeCreated: this.timeCreated,
+        }
+    }
 }
