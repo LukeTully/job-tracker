@@ -43,6 +43,19 @@ export default function ({
     timeEdited = null
 }) {
 
+    validateTitle(title);
+    validateCompany(company);
+    validateSalaryMin(salaryMin);
+    validateSalaryMax(salaryMax);
+    validateDescription(description);
+    validateExperienceLevel(experienceLevel);
+    validateTech(tech);
+    validateApplied(applied);
+    validateInterviewCount(interviewCount);
+    validateEasyApply(easyApply);
+    validateRequiresPreInterviewTest(requiresPreInterviewTest);
+    validateRequiresHomework(requiresHomework);
+    
     const getIndex = () => index;
     const setIndex = (title, company) => {
         // No extra validation needed here, since the index is generated here.
