@@ -25,214 +25,194 @@ import {
     EXP_LEVEL_LIST
 } from "../constants";
 
-export default class Job {
-    constructor({
-        index = 0,
-        title = "",
-        company = "",
-        salaryMin = 0,
-        salaryMax = 0,
-        description = "",
-        experienceLevel = "Senior",
-        tech = [],
-        applied = false,
-        interviewCount = 0,
-        easyApply = false,
-        requiresPreInterviewTest = false,
-        requiresHomework = false,
-        timeCreated = null,
-        timeEdited = null
-    }) {
-        this.index = index;
-        this.title = title;
-        this.company = company;
-        this.salaryMin = salaryMin;
-        this.salaryMax = salaryMax;
-        this.description = description;
-        this.experienceLevel = experienceLevel;
-        this.tech = tech;
-        this.applied = applied;
-        this.interviewCount = interviewCount;
-        this.easyApply = easyApply;
-        this.requiresPreInterviewTest = requiresPreInterviewTest;
-        this.requiresHomework = requiresHomework;
-        this.timeEdited = timeEdited;
-        this.timeCreated = timeCreated;
-    }
-    get index() {
-        return this.index;
-    }
+export default function ({
+    index = 0,
+    title = "",
+    company = "",
+    salaryMin = 0,
+    salaryMax = 0,
+    description = "",
+    experienceLevel = "Senior",
+    tech = [],
+    applied = false,
+    interviewCount = 0,
+    easyApply = false,
+    requiresPreInterviewTest = false,
+    requiresHomework = false,
+    timeCreated = null,
+    timeEdited = null
+}) {
 
-
-    setIndex(title, company) {
+    const getIndex = () => index;
+    const setIndex = (title, company) => {
         // No extra validation needed here, since the index is generated here.
-        this.index = generateIndex(title, company);
+        index = generateIndex(title, company);
     }
 
-    get timeCreated() {
-        return this.timeCreated;
+    const getTimeCreated = () => timeCreated;
+    const setTimeCreated = () => {
+        timeCreated = generateTimestamp();
     }
 
-    setTimeCreated() {
-        this.timeCreated = generateTimestamp();
+    const getTimeEdited = () => timeEdited;
+    const setTimeEdited = () => {
+        timeEdited = generateTimestamp();
     }
 
-    get timeEdited() {
-        return this.timeEdited;
-    }
-    setTimeEdited() {
-        this.timeEdited = generateTimestamp();
+    const getTitle = () => title;
+    const setTitle = (t) => {
+        try {
+            validateTitle(t);
+            title = t;
+        } catch (err) {
+            error(err);
+        }
     }
 
-    get title() {
-        return this.title;
-    }
-    setTitle(title) {
+    const getCompany = () => company;
+    const setCompany = (c) => {
         try {
-            validateTitle(title);
-            this.title = title;
+            validateCompany(c);
+            company = c;
         } catch (err) {
             error(err);
         }
     }
-    get company() {
-        return this.company;
-    }
-    setCompany(company) {
-        try {
-            validateCompany(company);
-            this.company = company;
-        } catch (err) {
-            error(err);
-        }
-    }
-    get salaryMin() {
-        return this.salaryMin;
-    }
-    setSalaryMin(salaryMin) {
-        try {
-            validateSalaryMin(salaryMin);
-            this.salaryMin = salaryMin;
-        } catch (err) {
-            error(err);
-        }
-    }
-    get salaryMax() {
-        return this.salaryMax;
-    }
-    setSalaryMax(salaryMax) {
-        try {
-            validateSalaryMax(salaryMax);
-            this.salaryMax = salaryMax;
-        } catch (err) {
-            error(err);
-        }
-    }
-    get description(description) {
-        return description;
-    }
-    setDescription(description) {
-        try {
-            validateDescription(description);
-            this.description = description;
-        } catch (err) {
-            error(err);
-        }
 
-    }
-    get experienceLevel() {
-        return this.experienceLevel;
-    }
-    setExperienceLevel(experienceLevel) {
+    const getSalaryMin = () => salaryMin;
+    const setSalaryMin = (newSalaryMin) => {
         try {
-            validateExperienceLevel(experienceLevel, EXP_LEVEL_LIST);
-        } catch (err) {
-            this.experienceLevel = experienceLevel;
-        }
-    }
-    get tech() {
-        return this.tech;
-    }
-    setTech(tech) {
-        try {
-            validateTech(tech, TECH_LIST);
-            this.tech = tech;
+            validateSalaryMin(newSalaryMin);
+            salaryMin = newSalaryMin;
         } catch (err) {
             error(err);
         }
     }
-    get applied() {
-        return this.applied;
-    }
-    setApplied(applied) {
+
+    const getSalaryMax = () => salaryMax;
+    const setSalaryMax = (newSalaryMax) => {
         try {
-            validateApplied(applied);
-            this.applied = applied;
+            validateSalaryMax(newSalaryMax);
+            salaryMax = newSalaryMax;
         } catch (err) {
             error(err);
         }
     }
-    get interviewCount() {
-        return this.interviewCount;
-    }
-    setInterviewCount(interviewCount) {
+
+    const getDescription = () => description;
+    const setDescription = (newDescription) => {
         try {
-            validateInterviewCount(interviewCount);
-            this.interviewCount = interviewCount;
+            validateDescription(newDescription);
+            description = newDescription;
         } catch (err) {
             error(err);
         }
     }
-    get easyApply() {
-        return this.easyApply;
-    }
-    setEasyApply(easyApply) {
+
+    const getExperienceLevel = () => experienceLevel;
+    const setExperienceLevel = (newExperienceLevel) => {
         try {
-            validateEasyApply(easyApply);
-            this.easyApply = easyApply;
+            validateExperienceLevel(newExperienceLevel, EXP_LEVEL_LIST);
+            experienceLevel = newExperienceLevel;
         } catch (err) {
             error(err);
         }
     }
-    get requiresPreInterviewTest() {
-        return this.requiresPreInterviewTest;
-    }
-    setRequiresPreInterviewTest(requiresPreInterviewTest) {
+    const getTech = () => tech;
+    const setTech = (newTech) => {
         try {
-            validateRequiresPreInterviewTest(requiresPreInterviewTest);
-            this.requiresPreInterviewTest = requiresPreInterviewTest;
+            validateTech(newTech, TECH_LIST);
+            tech = newTech;
         } catch (err) {
             error(err);
         }
     }
-    get requiresHomework() {
-        return this.requiresHomework;
-    }
-    setRequiresHomework(requiresHomework) {
+    const getApplied = () => applied;
+    const setApplied = (newApplied) {
         try {
-            validateRequiresHomework(requiresHomework);
-            this.requiresHomework = requiresHomework;
+            validateApplied(newApplied);
+            applied = newApplied;
         } catch (err) {
             error(err);
         }
     }
-    toObject() {
-        return {
-            index: this.index,
-            title: this.title,
-            company: this.company,
-            salaryMin: this.salaryMin,
-            salaryMax: this.salaryMax,
-            description: this.description,
-            experienceLevel: this.experienceLevel,
-            tech: this.tech,
-            applied: this.applied,
-            interviewCount: this.interviewCount,
-            easyApply: this.easyApply,
-            requiresPreInterviewTest: this.requiresPreInterviewTest,
-            requiresHomework: this.requiresHomework,
-            timeEdited: this.timeEdited,
-            timeCreated: this.timeCreated,
+
+    const getInterviewCount = () => interviewCount;
+    const setInterviewCount = (newInterviewCount) => {
+        try {
+            validateInterviewCount(newInterviewCount);
+            interviewCount = newInterviewCount;
+        } catch (err) {
+            error(err);
         }
     }
-}
+
+    const getEasyApply = () => easyApply;
+    const setEasyApply = (newEasyApply) => {
+        try {
+            validateEasyApply(newEasyApply);
+            easyApply = newEasyApply;
+        } catch (err) {
+            error(err);
+        }
+    }
+
+    const getRequiresPreInterviewTest = () => requiresPreInterviewTest;
+    const setRequiresPreInterviewTest = (newRequiresPreInterviewTest) => {
+        try {
+            validateRequiresPreInterviewTest(newRequiresPreInterviewTest);
+            requiresPreInterviewTest = newRequiresPreInterviewTest;
+        } catch (err) {
+            error(err);
+        }
+    }
+
+    const getRequiresHomework = () => requiresHomework;
+    const setRequiresHomework = (newRequiresHomework) => {
+        try {
+            validateRequiresHomework(newRequiresHomework);
+            requiresHomework = newRequiresHomework;
+        } catch (err) {
+            error(err);
+        }
+    }
+
+    const toObject = () => {
+        index,
+        title,
+        company,
+        salaryMin,
+        salaryMax,
+        description,
+        experienceLevel,
+        tech,
+        applied,
+        interviewCount,
+        easyApply,
+        requiresPreInterviewTest,
+        requiresHomework,
+        timeEdited,
+        timeCreated
+    }
+
+    return {
+        index,
+        title,
+        company,
+        salaryMin,
+        salaryMax,
+        description,
+        experienceLevel,
+        tech,
+        applied,
+        interviewCount,
+        easyApply,
+        requiresPreInterviewTest,
+        requiresHomework,
+        timeEdited,
+        timeCreated,
+        getIndex,
+        setIndex,
+        toObject,
+    }
+};
