@@ -3,7 +3,6 @@ import {
     generateTimestamp
 } from "../utilities";
 import {
-    validateIndex,
     validateTitle,
     validateCompany,
     validateSalaryMin,
@@ -26,7 +25,6 @@ import {
 } from "../constants";
 
 export default function ({
-    index = 0,
     title = "",
     company = "",
     salaryMin = 0,
@@ -207,6 +205,8 @@ export default function ({
         timeEdited,
         timeCreated
     }
+
+    index = generateIndex(title, company);
 
     return {
         index,
