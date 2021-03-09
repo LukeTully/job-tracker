@@ -2,8 +2,16 @@
   <el-main>
     <div>
       <el-table :data="jobList" style="width: 100%">
-        <el-table-column prop="title" label="Title" width="180"></el-table-column>
-        <el-table-column prop="company" label="Company" width="180"></el-table-column>
+        <el-table-column
+          prop="title"
+          label="Title"
+          width="180"
+        ></el-table-column>
+        <el-table-column
+          prop="company"
+          label="Company"
+          width="180"
+        ></el-table-column>
         <el-table-column prop="salaryMax" label="Max Salary"></el-table-column>
       </el-table>
     </div>

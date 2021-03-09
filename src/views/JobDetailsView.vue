@@ -33,7 +33,7 @@ const EXP_LEVEL_LIST = [
   "Intermediate",
   "Junior",
   "Lead",
-  "Principal",
+  "Principal"
 ];
 
 const TECH_LIST = [
@@ -42,7 +42,7 @@ const TECH_LIST = [
   "Webpack",
   "React.js",
   "Node.js",
-  "Redux",
+  "Redux"
 ];
 
 function getJob(id, cb) {
@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       job: jobDefaults,
-      loaded: false,
+      loaded: false
     };
   },
   computed: {
@@ -63,27 +63,27 @@ export default {
         "salaryMin",
         "salaryMax",
         "experienceLevel",
-        "applied",
+        "applied"
       ];
       const table = [];
 
-      tableKeys.forEach((tableKey) => {
+      tableKeys.forEach(tableKey => {
         if (this.job[tableKey] != undefined) {
           table.push({
             attribute: jobPropLabels[tableKey],
-            val: this.job[tableKey],
+            val: this.job[tableKey]
           });
         }
       });
 
       return table;
-    },
+    }
   },
   created() {
     this.setData(this.$store.state.currentJob);
   },
   beforeRouteEnter(to, from, next) {
-    next(async (vm) => {
+    next(async vm => {
       await store.dispatch("setActiveJob", to.params.id);
       vm.setData({ ...store.state.currentJob });
     });
@@ -100,18 +100,18 @@ export default {
     [Table.name]: Table,
     [TableColumn.name]: TableColumn,
     [Main.name]: Main,
-    [Tag.name]: Tag,
+    [Tag.name]: Tag
   },
   methods: {
     setData(job) {
       this.job = {
         experienceLevels: EXP_LEVEL_LIST,
         techList: TECH_LIST,
-        ...job,
+        ...job
       };
       this.loaded = true;
-    },
-  },
+    }
+  }
 };
 </script>
 <style>
