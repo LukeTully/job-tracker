@@ -12,23 +12,7 @@ import store from "../../store/index.js";
 import JobForm from "../components/JobForm";
 import { generateIndex } from "../../utilities";
 import Job from "../../models/JobModel";
-
-const EXP_LEVEL_LIST = [
-  "Senior",
-  "Intermediate",
-  "Junior",
-  "Lead",
-  "Principal"
-];
-
-const TECH_LIST = [
-  "TypeScript",
-  "JavaScript",
-  "Webpack",
-  "React.js",
-  "Node.js",
-  "Redux"
-];
+import { EXP_LEVEL_LIST, TECH_LIST } from "../../constants";
 
 export default {
   components: { JobForm },
@@ -40,7 +24,7 @@ export default {
       futureJob: {},
       message: this.$store.state.message,
       loading: false,
-      error: null
+      error: null,
     };
   },
   methods: {
@@ -50,14 +34,14 @@ export default {
 
       await this.$store.dispatch("SAVE_JOB", {
         ...event.formData,
-        index: newIndex
+        index: newIndex,
       });
       await this.$store.dispatch("getAllJobs");
       this.$router.push({ name: "job", params: { id: newIndex } });
     },
     async getJobToEdit(id, cb) {
       this.loading = true;
-    }
-  }
+    },
+  },
 };
 </script>

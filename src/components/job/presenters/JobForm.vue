@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { jobProps } from "../../../constants";
+import { jobProps, EXP_LEVEL_LIST, TECH_LIST } from "../../../constants";
 import {
   Input,
   InputNumber,
@@ -100,25 +100,8 @@ import {
   Option,
   Button,
   Col,
-  Switch
+  Switch,
 } from "element-ui";
-
-const EXP_LEVEL_LIST = [
-  "Senior",
-  "Intermediate",
-  "Junior",
-  "Lead",
-  "Principal"
-];
-
-const TECH_LIST = [
-  "TypeScript",
-  "JavaScript",
-  "Webpack",
-  "React.js",
-  "Node.js",
-  "Redux"
-];
 
 export default {
   name: "JobForm",
@@ -138,9 +121,9 @@ export default {
         interviewCount: 0,
         easyApply: false,
         requiresPreInterviewTest: false,
-        requiresHomework: false
+        requiresHomework: false,
       },
-      labelPosition: "left"
+      labelPosition: "left",
     };
   },
   computed: {
@@ -149,7 +132,7 @@ export default {
         return "Update";
       }
       return "Create";
-    }
+    },
   },
   components: {
     [Input.name]: Input,
@@ -160,25 +143,25 @@ export default {
     [Button.name]: Button,
     [Col.name]: Col,
     [InputNumber.name]: InputNumber,
-    [Switch.name]: Switch
+    [Switch.name]: Switch,
   },
   props: {
     salaryMin: {
       type: Number,
-      default: 0
+      default: 0,
     },
     salaryMax: {
       type: Number,
-      default: 100000
+      default: 100000,
     },
     type: {
-      validator: function(value) {
+      validator: function (value) {
         const options = ["create", "edit"];
         // The value must match one of these strings
         return options.indexOf(value) !== -1;
-      }
+      },
     },
-    ...jobProps
+    ...jobProps,
   },
   methods: {
     handleSubmit(event) {
@@ -187,11 +170,11 @@ export default {
       }
       this.$emit("submit-form", {
         formData: {
-          ...this.form
-        }
+          ...this.form,
+        },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
