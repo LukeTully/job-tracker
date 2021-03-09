@@ -32,13 +32,16 @@ export default {
   props: ["formData", "id"],
   beforeRouteEnter(to, from, next) {
     next(async (vm) => {
+      // Activate the new job
       await store.dispatch("setActiveJob", to.params.id);
-      vm.futureJob = { ...store.state.currentJob };
+
+      // Set the new current job in local state
+      vm.setJobData();
     });
   },
   beforeRouteUpdate(to, from, next) {
     store.dispatch("setActiveJob", to.params.id).then(() => {
-      this.futureJob = this.$store.state.currentJob;
+      this.setJobData();
       next();
     });
   },
@@ -56,6 +59,9 @@ export default {
       if (oldIndex != newIndex) {
         this.$router.push({ name: "job", params: { id: newIndex } }); // Navigate to the new url
       }
+    },
+    setJobData(job) {
+      this.futureJob = { ...store.state.currentJob };
     },
     async getJobToEdit(id, cb) {
       this.loading = true;
