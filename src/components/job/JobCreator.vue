@@ -29,15 +29,27 @@ export default {
   },
   methods: {
     async submitJob(event) {
-      const job = new Job(event.formData);
-      const newIndex = job.getIndex();
+      const newJobData = event.formData;
+      const job = new Job(newJobData);
+      const index = job.getIndex();
 
+      // Create the new job
       await this.$store.dispatch("SAVE_JOB", {
-        ...event.formData,
-        index: newIndex,
+        ...newJobData,
+        index,
       });
+
+      // Refresh the whole list of jobs that has changed
       await this.$store.dispatch("getAllJobs");
-      this.$router.push({ name: "job", params: { id: newIndex } });
+
+      // Set the active job as the current one
+      this.$store.dispatch("setActiveJob", index);
+
+      // Navigate to the newly added job
+      this.$router.push({
+        name: "job",
+        params: { id: index },
+      });
     },
     async getJobToEdit(id, cb) {
       this.loading = true;
