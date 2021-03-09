@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container>
-      <JobList :jobs="jobList" />
+      <JobList v-bind="jobs" />
       <el-main>
         <router-view></router-view>
       </el-main>
@@ -10,26 +10,10 @@
 </template>
 
 <script>
-import JobList from "./components/JobList.vue";
+import JobList from "./components/job/presentors/JobList.vue";
 import { Table, TableColumn, Main, Container, Button } from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
-
-const EXP_LEVEL_LIST = [
-  "Senior",
-  "Intermediate",
-  "Junior",
-  "Lead",
-  "Principal",
-];
-
-const TECH_LIST = [
-  "TypeScript",
-  "JavaScript",
-  "Webpack",
-  "React.js",
-  "Node.js",
-  "Redux",
-];
+import { TECH_LIST, EXP_LEVEL_LIST } from "./constants";
 
 export default {
   name: "App",
@@ -48,7 +32,7 @@ export default {
     [Button.name]: Button,
   },
   computed: {
-    jobList() {
+    jobs() {
       return this.$store.state.jobs;
     },
   },
@@ -60,7 +44,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
