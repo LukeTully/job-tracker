@@ -13,8 +13,9 @@
 
 <script>
 import store from "../../store/index.js";
-import JobForm from "../components/JobForm";
+import JobForm from "./presenters/JobForm";
 import { TECH_LIST, EXP_LEVEL_LIST } from "../../constants";
+import Job from "../../models/Job";
 
 export default {
   components: { JobForm },

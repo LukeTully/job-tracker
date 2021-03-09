@@ -7,11 +7,8 @@
 </template>
 
 <script>
-import jobDefaults from "../../store/jobDefaults";
-import store from "../../store/index.js";
-import JobForm from "../components/JobForm";
-import { generateIndex } from "../../utilities";
-import Job from "../../models/JobModel";
+import JobForm from "../../components/job/presenters/JobForm";
+import Job from "../../models/Job";
 import { EXP_LEVEL_LIST, TECH_LIST } from "../../constants";
 
 export default {

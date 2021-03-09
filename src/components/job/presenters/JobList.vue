@@ -18,20 +18,20 @@
 
 <script>
 import { Aside, MenuItem, Menu, Button } from "element-ui";
-import JobListItem from "../components/JobListItem";
+import JobListItem from "./JobListItem";
 
 export default {
   name: "JobList",
   props: {
-    jobs: Array
+    jobs: Array,
   },
   components: {
     [Aside.name]: Aside,
     [MenuItem.name]: MenuItem,
     [Menu.name]: Menu,
     [Button.name]: Button,
-    JobListItem
-  }
+    JobListItem,
+  },
 };
 </script>
 

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import JobList from "./components/job/presentors/JobList.vue";
+import JobList from "./components/job/presenters/JobList.vue";
 import { Table, TableColumn, Main, Container, Button } from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import { TECH_LIST, EXP_LEVEL_LIST } from "./constants";
