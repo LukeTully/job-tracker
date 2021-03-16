@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container>
-      <JobList v-bind="jobs" />
+      <JobList :jobs="jobs" />
       <el-main>
         <router-view></router-view>
       </el-main>
