@@ -2,7 +2,11 @@
   <div id="form-container">
     <h1 v-if="error">Error!: {{ error.message }}</h1>
     <h1 v-else-if="loading">The current job is loading, please wait.</h1>
-    <job-form @submit-form="submitJob" type="create"></job-form>
+    <job-form
+      @submit-form="submitJob"
+      type="create"
+      v-bind="futureJob"
+    ></job-form>
   </div>
 </template>
 
@@ -32,7 +36,6 @@ export default {
       const newJobData = event.formData;
       const job = new Job(newJobData);
       const index = job.getIndex();
-
       // Create the new job
       await this.$store.dispatch("SAVE_JOB", {
         ...newJobData,
