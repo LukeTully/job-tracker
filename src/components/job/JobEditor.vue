@@ -19,7 +19,7 @@ import Job from "../../models/Job";
 
 export default {
   components: { JobForm },
-  name: "JobEdit",
+  name: "JobEditor",
   data() {
     return {
       experienceLevels: EXP_LEVEL_LIST,
@@ -57,9 +57,7 @@ export default {
 
       const newIndex = newJob.setIndex(); // Generate index with the new form data that was used to generate the job
 
-      if (oldIndex != newIndex) {
-        this.$router.push({ name: "job", params: { id: newIndex } }); // Navigate to the new url
-      }
+      this.$router.push({ name: "job", params: { id: newIndex } }); // Navigate to the new url
     },
     setJobData(job) {
       this.futureJob = { ...store.state.currentJob };

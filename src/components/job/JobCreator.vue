@@ -13,7 +13,7 @@ import { EXP_LEVEL_LIST, TECH_LIST } from "../../constants";
 
 export default {
   components: { JobForm },
-  name: "JobCreate",
+  name: "JobCreator",
   data() {
     return {
       experienceLevels: EXP_LEVEL_LIST,
