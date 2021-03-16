@@ -15,35 +15,31 @@ import {
 } from "../validators";
 import { error } from "../services/errors";
 import { TECH_LIST, EXP_LEVEL_LIST } from "../constants";
+import defaults from "../store/jobDefaults";
 
-export default function({
-  title = "",
-  company = "",
-  salaryMin = 0,
-  salaryMax = 0,
-  description = "",
-  experienceLevel = "Senior",
-  tech = [],
-  applied = false,
-  interviewCount = 0,
-  easyApply = false,
-  requiresPreInterviewTest = false,
-  requiresHomework = false,
-  timeCreated = null,
-  timeEdited = null
-}) {
-  validateTitle(title);
-  validateCompany(company);
-  validateSalaryMin(salaryMin);
-  validateSalaryMax(salaryMax);
-  validateDescription(description);
-  validateExperienceLevel(experienceLevel);
-  validateTech(tech);
-  validateApplied(applied);
-  validateInterviewCount(interviewCount);
-  validateEasyApply(easyApply);
-  validateRequiresPreInterviewTest(requiresPreInterviewTest);
-  validateRequiresHomework(requiresHomework);
+export default function(
+  {
+    index,
+    title,
+    company,
+    salaryMin,
+    salaryMax,
+    description,
+    experienceLevel,
+    tech,
+    applied,
+    interviewCount,
+    easyApply,
+    requiresPreInterviewTest,
+    requiresHomework,
+    timeCreated,
+    timeEdited
+  } = {
+    title: required("title"),
+    company: required("company"),
+    ...defaults
+  }
+) {
 
   const getIndex = () => index;
   const setIndex = (newTitle = null, newCompany = null) => {
