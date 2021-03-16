@@ -1,6 +1,6 @@
-export function generateTimestamp() {
-    return performance.now();
-}
+export const generateTimestamp = () => {
+  return Date.now();
+};
 
 export function generateIndex(title, company) {
     const initialIndex = `${title}-at-${company}`;
