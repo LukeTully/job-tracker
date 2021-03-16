@@ -1,5 +1,6 @@
 <template>
   <el-form :model="form" ref="form" label-position="left" label-width="240px">
+    <el-progress :percentage="form.applied ? 100 : 0"></el-progress>
     <el-form-item label="Job Title">
       <el-input name="title" type="text" v-model="form.title" />
     </el-form-item>
@@ -101,6 +102,7 @@ import {
   Button,
   Col,
   Switch,
+  Progress,
 } from "element-ui";
 
 export default {
@@ -117,11 +119,11 @@ export default {
         description: this.description,
         experienceLevel: this.experienceLevel,
         tech: this.tech,
-        applied: false,
-        interviewCount: 0,
-        easyApply: false,
-        requiresPreInterviewTest: false,
-        requiresHomework: false,
+        applied: this.applied,
+        interviewCount: this.interviewCount,
+        easyApply: this.easyApply,
+        requiresPreInterviewTest: this.requiresPreInterviewTest,
+        requiresHomework: this.requiresHomework,
       },
       labelPosition: "left",
     };
@@ -144,6 +146,7 @@ export default {
     [Col.name]: Col,
     [InputNumber.name]: InputNumber,
     [Switch.name]: Switch,
+    [Progress.name]: Progress,
   },
   props: {
     salaryMin: {
