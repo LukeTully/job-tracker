@@ -3,7 +3,9 @@
     <el-container>
       <JobList :jobs="jobs" />
       <el-main>
-        <router-view></router-view>
+        <transition name="fade" mode="out-in">
+          <router-view></router-view>
+        </transition>
       </el-main>
     </el-container>
   </div>
