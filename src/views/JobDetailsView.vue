@@ -9,6 +9,7 @@
       <el-tag v-for="tag in job.tech" :key="tag" disable-transitions>
         {{ tag }}
       </el-tag>
+      <el-progress :percentage="percentageComplete"></el-progress>
       <el-table :data="stats" style="width: 50%">
         <el-table-column prop="attribute" label="Attribute"></el-table-column>
         <el-table-column prop="val" label="Value"></el-table-column>
@@ -25,7 +26,7 @@
 <script>
 import jobDefaults from "../store/jobDefaults.js";
 import store from "../store/index.js";
-import { Button, Table, TableColumn, Main, Tag } from "element-ui";
+import { Button, Table, TableColumn, Main, Tag, Progress } from "element-ui";
 import { jobPropLabels, EXP_LEVEL_LIST, TECH_LIST } from "../constants";
 
 function getJob(id, cb) {
@@ -61,7 +62,13 @@ export default {
 
       return table;
     },
-  },
+    percentageComplete() {
+      const { applied } = this.job;
+      if (applied) {
+        return 100;
+      }
+      return 0;
+    },
   created() {
     this.setData(this.$store.state.currentJob);
   },
@@ -84,6 +91,7 @@ export default {
     [TableColumn.name]: TableColumn,
     [Main.name]: Main,
     [Tag.name]: Tag,
+    [Progress.name]: Progress,
   },
   methods: {
     setData(job) {
