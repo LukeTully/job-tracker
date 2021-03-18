@@ -1,4 +1,5 @@
 <template>
+  <el-menu-item :class="status">
     <span>{{ title }} ></span>
   </el-menu-item>
 </template>
@@ -11,6 +12,18 @@ export default {
   name: 'JobListItem',
   props: {
     ...jobProps,
+  },
+  computed: {
+    status() {
+      const createdDate = this.timeCreated;
+      const currentDate = Date.now();
+      const elapsed = currentDate - createdDate;
+      const timeInWeeks = elapsed / 6.048e8;
+      if (timeInWeeks > 1.5) {
+        return 'stale';
+      }
+      return this.applied ? 'current applied' : 'current';
+    },
   },
   components: {
     [MenuItem.name]: MenuItem,
@@ -26,5 +39,18 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-align: left;
+}
+
+.el-menu-item.current {
+  color: red;
+}
+.current {
+  color: red;
+}
+.current.applied {
+  color: green;
+}
+.stale {
+  color: grey;
 }
 </style>
