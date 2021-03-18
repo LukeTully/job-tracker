@@ -6,7 +6,7 @@
     <div id="details-container" v-if="loaded">
       <h2>{{ job.title }} at {{ job.company }}</h2>
       <pre class="job-desc">{{ job.description }}</pre>
-      <el-tag v-for="tag in job.tech" :key="tag">
+      <el-tag v-for="tag in job.tech" :key="tag" disable-transitions>
         {{ tag }}
       </el-tag>
       <el-table :data="stats" style="width: 50%">
