@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import JobList from "./components/job/presenters/JobList.vue";
-import { Table, TableColumn, Main, Container, Button } from "element-ui";
-import "element-ui/lib/theme-chalk/index.css";
-import { TECH_LIST, EXP_LEVEL_LIST } from "./constants";
+import JobList from './components/job/presenters/JobList.vue';
+import { Table, TableColumn, Main, Container, Button } from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import { TECH_LIST, EXP_LEVEL_LIST } from './constants';
 
 export default {
-  name: "App",
+  name: 'App',
   data() {
     return {
       experienceLevels: EXP_LEVEL_LIST,
@@ -38,9 +38,9 @@ export default {
       return this.$store.state.jobs;
     },
   },
-  created: function () {
+  created: function bacon() {
     if (this.$store.state.jobs.length === 0) {
-      this.$store.dispatch("initJobs");
+      this.$store.dispatch('initJobs');
     }
   },
 };

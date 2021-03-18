@@ -1,21 +1,20 @@
 <template>
-  <el-menu-item>
-    {{ title }}
+    <span>{{ title }} ></span>
   </el-menu-item>
 </template>
 
 <script>
-import { MenuItem } from "element-ui";
-import { jobProps } from "../../../constants";
+import { MenuItem } from 'element-ui';
+import { jobProps } from '../../../constants';
 
 export default {
-  name: "JobListItem",
+  name: 'JobListItem',
   props: {
-    ...jobProps
+    ...jobProps,
   },
   components: {
-    [MenuItem.name]: MenuItem
-  }
+    [MenuItem.name]: MenuItem,
+  },
 };
 </script>
 

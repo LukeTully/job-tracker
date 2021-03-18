@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import { Table, TableColumn, Main } from "element-ui";
+import { Table, TableColumn, Main } from 'element-ui'
 
 export default {
-  name: "Summary",
+  name: 'Summary',
   computed: {
     jobList() {
       console.log(this.$store.state.jobs.length);
@@ -32,7 +32,7 @@ export default {
   components: {
     [Table.name]: Table,
     [TableColumn.name]: TableColumn,
-    [Main.name]: Main
-  }
-};
+    [Main.name]: Main,
+  },
+}
 </script>
