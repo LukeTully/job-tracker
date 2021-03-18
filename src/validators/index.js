@@ -19,7 +19,7 @@ export function validateApplied(applied) {
 export function validateCompany(company) {
     const min = 1;
     // Ensure a min of characters
-    if (title.length < min) {
+  if (company.length < min) {
         throw new Error(`Company name contained less than ${min} characters`);
     }
     return true;
@@ -96,10 +96,8 @@ export function validateRequiresHomework(requiresHomework) {
     return true
 }
 
-
-
 function validateBoolean(val) {
-    if (typeof applied !== "boolean") {
+  if (typeof val !== "boolean") {
         return false;
     }
     return true;
