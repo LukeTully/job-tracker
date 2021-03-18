@@ -1,7 +1,7 @@
 <template>
   <el-main>
     <div>
-      <el-table :data="jobList" style="width: 100%">
+      <el-table :data="jobs" style="width: 100%">
         <el-table-column
           prop="title"
           label="Title"
@@ -24,10 +24,9 @@ import { Table, TableColumn, Main } from 'element-ui'
 export default {
   name: 'Summary',
   computed: {
-    jobList() {
-      console.log(this.$store.state.jobs.length);
-      return this.$store.state.jobs;
-    }
+    jobs() {
+      return this.$store.state.jobs
+    },
   },
   components: {
     [Table.name]: Table,
