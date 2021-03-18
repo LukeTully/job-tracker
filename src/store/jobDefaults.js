@@ -11,4 +11,6 @@ export default {
   easyApply: false,
   requiresPreInterviewTest: false,
   requiresHomework: false,
-};
+  timeCreated: null,
+  timeEdited: null,
+}
