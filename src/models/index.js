@@ -1,3 +1,3 @@
-import Job from "./JobModel";
+import Job from "./Job";
 
-export const Job;
+export default Job;
