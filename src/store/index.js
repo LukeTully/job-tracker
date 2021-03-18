@@ -1,18 +1,18 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import initialData from "./exampleData.js";
-import * as localForage from "localforage";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import initialData from './exampleData';
+import * as localForage from 'localforage';
 import {
   read,
   all,
   update,
-  create
-} from "../services/index";
+  create,
+} from '../services/index';
 import {
-  generateTimestamp
-} from "../utilities";
-import {error, errorSavingJob } from "../services/errors";
-import Job from "../models/JobModel.js";
+  errorSavingJob,
+  asdas,
+} from '../services/errors';
+import Job from '../models/Job';
 
 Vue.use(Vuex);
 
@@ -21,14 +21,15 @@ localForage.config({
   driver: localForage.INDEXEDDB,
   version: 1,
   storeName: 'jobstore',
-  description: 'Database of jobs.'
+  description: 'Database of jobs.',
 });
 
 export default new Vuex.Store({
   state: {
     jobs: [],
-    currentJob: {},
-    message: ""
+    currentJob: {
+    },
+    message: '',
   },
   mutations: {
     saveJob(state, job) {
@@ -42,79 +43,77 @@ export default new Vuex.Store({
     },
     error(state, err) {
       state.message = err.message;
-    }
+    },
   },
   actions: {
     async initJobs({
-      commit,
-      dispatch
+      commit, dispatch, 
     }) {
-
       const jobCount = await localForage.length();
       // If there are jobs in localStorage, bring those into VUEX
       if (jobCount > 0) {
-        syncJobsToLocalState(commit)
+        syncJobsToLocalState(commit);
       } else {
         // Use some initial data from a static file
         // commit('setJobs', initialData);
         initialData.forEach(job => {
-          dispatch('SAVE_JOB', job)
-        })
+          dispatch('SAVE_JOB', job);
+        });
       }
     },
     async SAVE_JOB({
-      commit,
-      state,
-      dispatch
+      commit, dispatch, 
     }, newJob) {
       try {
         const job = new Job(newJob);
-        job.setTimeCreated();
-        commit("saveJob", job);
-        create(null, job);
+        const jobObj = job.toObject();
+        commit('saveJob', jobObj);
+        create(null, jobObj);
       } catch (err) {
         dispatch('saveError', err);
       }
-
     },
     async updateJob({
-      commit,
-      dispatch,
-      state
+      dispatch, 
     }, newJob) {
-      const job = new Job(job);
+      const job = new Job(newJob);
       job.setTimeEdited();
+      const jobObj = job.toObject();
+
       try {
-        await update(job.index, job.toObject());
+        await update(job.index, jobObj);
         dispatch('getAllJobs');
       } catch (err) {
         dispatch('saveError', err);
       }
     },
     async getAllJobs({
-      commit
+      commit, 
     }) {
       const jobs = await all();
-      jobs.map(job => new Job(job));
+      jobs.map(job => new Job(job).toObject());
       commit('setJobs', jobs);
     },
     async setActiveJob({
-      commit
+      commit, 
     }, id) {
       const job = await read(id);
-      commit("activeJob", job);
+      commit('activeJob', job);
     },
-    saveError({ commit }, err) {
-      commit('error');
+    saveError({
+      commit, 
+    }, err) {
+      commit('error', err);
       errorSavingJob(err);
-    }
+    },
   },
-  modules: {},
+  modules: {
+  },
 });
 
 function syncJobsToLocalState(commit) {
   // Get the items from localForage
-  localForage.iterate((job) => {
+  localForage.iterate(job => {
     commit('saveJob', job);
   });
 }
