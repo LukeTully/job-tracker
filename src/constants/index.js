@@ -11,6 +11,8 @@ export const jobPropLabels = {
   easyApply: 'Easy Apply Available?',
   requiresPreInterviewTest: 'Requires Pre-interview test',
   requiresHomework: 'Requires homework',
+  timeEdited: 'Time last edited',
+  timeCreated: 'Created on',
 };
 
 export const jobProps = {
