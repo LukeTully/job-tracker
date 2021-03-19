@@ -237,22 +237,9 @@ export default function (
   migrate();
   this.index = generateIndex(title, company);
 
-  return {
-    index,
-    title,
-    company,
-    salaryMin,
-    salaryMax,
-    description,
-    experienceLevel,
-    tech,
-    applied,
-    interviewCount,
-    easyApply,
-    requiresPreInterviewTest,
-    requiresHomework,
-    timeEdited,
-    timeCreated,
+  if (this.timeCreated === null || this.timeCreated === undefined) {
+    this.timeCreated = setTimeCreated();
+  }
     getIndex,
     setIndex,
     getRequiresHomework,
