@@ -37,10 +37,12 @@
     "env": {
       "node": true
     },
+    "plugins": [
+      "modules-newline"
+    ],
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended",
-      "@vue/prettier"
+      "eslint:recommended"
     ],
     "parserOptions": {
       "parser": "babel-eslint"
@@ -48,7 +50,34 @@
     "rules": {
       "no-console": 1,
       "no-debugger": 1,
-      "no-unused-vars": 1
+      "no-unused-vars": 1,
+      "semi": "error",
+      "space-before-function-paren": [
+        "error",
+        {
+          "anonymous": "always",
+          "named": "never",
+          "asyncArrow": "always"
+        }
+      ],
+      "object-property-newline": "warn",
+      "modules-newline/import-declaration-newline": "warn",
+      "indent": [
+        2,
+        2
+      ],
+      "object-curly-newline": [
+        "warn",
+        "always"
+      ],
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ],
+      "quotes": [
+        "warn",
+        "single"
+      ]
     }
   },
   "browserslist": [
