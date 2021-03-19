@@ -204,6 +204,15 @@ export default function (
     }
   };
 
+  const migrate = () => {
+    const schema = defaults;
+    for (let key in schema) {
+      if (this[key] === undefined) {
+        this[key] = defaults[key];
+      }
+    }
+  };
+
   const toObject = () => {
     return {
       index: this.index,
@@ -224,6 +233,8 @@ export default function (
     };
   };
 
+  // Patch new fields into existing jobs
+  migrate();
   this.index = generateIndex(title, company);
 
   return {
