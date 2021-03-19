@@ -1,4 +1,7 @@
-import { generateIndex, generateTimestamp } from "../utilities";
+import {
+  generateIndex,
+  generateTimestamp, 
+} from '../utilities';
 import {
   validateTitle,
   validateCompany,
@@ -11,13 +14,21 @@ import {
   validateInterviewCount,
   validateEasyApply,
   validateRequiresPreInterviewTest,
-  validateRequiresHomework
-} from "../validators";
-import { error } from "../services/errors";
-import { TECH_LIST, EXP_LEVEL_LIST } from "../constants";
-import defaults from "../store/jobDefaults";
+  validateRequiresHomework,
+} from '../validators';
+import {
+  error, 
+} from '../services/errors';
+import {
+  TECH_LIST,
+  EXP_LEVEL_LIST, 
+} from '../constants';
+import defaults from '../store/jobDefaults';
+import {
+  required, 
+} from '../utilities';
 
-export default function(
+export default function (
   {
     index,
     title,
@@ -33,12 +44,12 @@ export default function(
     requiresPreInterviewTest,
     requiresHomework,
     timeCreated,
-    timeEdited
+    timeEdited,
   } = {
-    title: required("title"),
-    company: required("company"),
-    ...defaults
-  }
+    title: required('title'),
+    company: required('company'),
+    ...defaults,
+  },
 ) {
 
   const getIndex = () => index;
