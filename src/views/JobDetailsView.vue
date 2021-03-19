@@ -55,18 +55,22 @@ export default {
         'salaryMax',
         'experienceLevel',
         'applied',
+        'interviewCount',
+        'easyApply',
+        'requiresPreInterviewTest',
+        'requiresHomework',
+        'timeCreated',
+        'timeEdited',
       ];
       const table = [];
-
       tableKeys.forEach((tableKey) => {
         if (this.job[tableKey] != undefined) {
           table.push({
             attribute: jobPropLabels[tableKey],
-            val: this.job[tableKey],
+            val: this.job[tableKey].toString(),
           });
         }
       });
-
       return table;
     },
     percentageComplete() {
