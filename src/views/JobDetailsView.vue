@@ -96,6 +96,14 @@ export default {
       next();
     }); // handle the error here
   },
+  watch: {
+    job() {
+      const duration = 0.2; // In seconds
+      this.loaded = false;
+      window.setTimeout(() => {
+        this.loaded = true;
+      }, duration * 1000);
+    },
   },
   components: {
     [Button.name]: Button,
