@@ -240,6 +240,19 @@ export default function (
   if (this.timeCreated === null || this.timeCreated === undefined) {
     this.timeCreated = setTimeCreated();
   }
+
+  validateTitle(this.title);
+  validateCompany(this.company);
+  validateSalaryMin(this.salaryMin);
+  validateSalaryMax(this.salaryMax);
+  validateDescription(this.description);
+  validateExperienceLevel(this.experienceLevel, EXP_LEVEL_LIST);
+  validateTech(this.tech);
+  validateApplied(this.applied);
+  validateInterviewCount(this.interviewCount);
+  validateEasyApply(this.easyApply);
+  validateRequiresPreInterviewTest(this.requiresPreInterviewTest);
+  validateRequiresHomework(this.requiresHomework);
     getIndex,
     setIndex,
     getRequiresHomework,
