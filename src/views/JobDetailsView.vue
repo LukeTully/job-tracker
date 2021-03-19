@@ -24,17 +24,24 @@
 }
 </style>
 <script>
-import jobDefaults from "../store/jobDefaults.js";
-import store from "../store/index.js";
-import { Button, Table, TableColumn, Main, Tag, Progress } from "element-ui";
-import { jobPropLabels, EXP_LEVEL_LIST, TECH_LIST } from "../constants";
-
-function getJob(id, cb) {
-  cb(null, store.state.jobs[id]);
-}
+import jobDefaults from '../store/jobDefaults.js';
+import store from '../store/index.js';
+import {
+  Button,
+  Table,
+  TableColumn,
+  Main,
+  Tag,
+  Progress,
+} from 'element-ui';
+import {
+  jobPropLabels,
+  EXP_LEVEL_LIST,
+  TECH_LIST,
+} from '../constants';
 
 export default {
-  name: "JobDetailsView",
+  name: 'JobDetailsView',
   data() {
     return {
       job: jobDefaults,
@@ -44,10 +51,10 @@ export default {
   computed: {
     stats() {
       const tableKeys = [
-        "salaryMin",
-        "salaryMax",
-        "experienceLevel",
-        "applied",
+        'salaryMin',
+        'salaryMax',
+        'experienceLevel',
+        'applied',
       ];
       const table = [];
 
@@ -63,27 +70,32 @@ export default {
       return table;
     },
     percentageComplete() {
-      const { applied } = this.job;
+      const {
+        applied,
+      } = this.job;
       if (applied) {
         return 100;
       }
       return 0;
     },
+  },
   created() {
     this.setData(this.$store.state.currentJob);
   },
   beforeRouteEnter(to, from, next) {
     next(async (vm) => {
-      await store.dispatch("setActiveJob", to.params.id);
-      vm.setData({ ...store.state.currentJob });
+      await store.dispatch('setActiveJob', to.params.id);
+      vm.setData({
+        ...store.state.currentJob,
+      });
     });
   },
   beforeRouteUpdate(to, from, next) {
-    store.dispatch("setActiveJob", to.params.id).then(() => {
+    store.dispatch('setActiveJob', to.params.id).then(() => {
       this.setData(this.$store.state.currentJob);
       next();
-    });
-    // handle the error here
+    }); // handle the error here
+  },
   },
   components: {
     [Button.name]: Button,
