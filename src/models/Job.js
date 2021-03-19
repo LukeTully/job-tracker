@@ -253,10 +253,32 @@ export default function (
   validateEasyApply(this.easyApply);
   validateRequiresPreInterviewTest(this.requiresPreInterviewTest);
   validateRequiresHomework(this.requiresHomework);
-    getIndex,
+
+  Object.assign(this, {
+    setTimeCreated,
+    getTimeCreated,
+    setTimeEdited,
+    getTimeEdited,
     setIndex,
+    getIndex,
+    setSalaryMax,
+    setSalaryMin,
+    setDescription,
+    getDescription,
+    getExperienceLevel,
+    setExperienceLevel,
+    getTech,
+    setTech,
+    getApplied,
+    setApplied,
+    getInterviewCount,
+    setInterviewCount,
+    getEasyApply,
+    setEasyApply,
+    getRequiresPreInterviewTest,
+    setRequiresPreInterviewTest,
     getRequiresHomework,
     setRequiresHomework,
-    toObject
-  };
+    toObject,
+  });
 }
