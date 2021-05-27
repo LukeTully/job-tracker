@@ -1,24 +1,9 @@
-# job-accounting
+# Job Tracker
+In the search for a new position, I realized that I could benefit from having a nice way of managing the jobs I applied to, and how far through the interview process I made it.
 
+This uses localForage to store jobs, and Vuex to manage state, and Vue-router for routing. It's very much a work in progress, but it does provide the minimal set of requirements I set out initially.
 ## Project setup
 ```
-yarn install
+npm run build
+npm run serve
 ```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
