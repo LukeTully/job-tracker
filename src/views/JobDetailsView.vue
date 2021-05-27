@@ -9,7 +9,6 @@
       <el-tag v-for="tag in job.tech" :key="tag" disable-transitions>
         {{ tag }}
       </el-tag>
-      <el-progress :percentage="percentageComplete"></el-progress>
       <el-table :data="stats" style="width: 50%">
         <el-table-column prop="attribute" label="Attribute"></el-table-column>
         <el-table-column prop="val" label="Value"></el-table-column>
