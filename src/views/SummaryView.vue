@@ -19,13 +19,17 @@
 </template>
 
 <script>
-import { Table, TableColumn, Main } from 'element-ui'
+import {
+  Table,
+  TableColumn,
+  Main,
+} from 'element-ui';
 
 export default {
   name: 'Summary',
   computed: {
     jobs() {
-      return this.$store.state.jobs
+      return this.$store.state.jobs;
     },
   },
   components: {
@@ -33,5 +37,5 @@ export default {
     [TableColumn.name]: TableColumn,
     [Main.name]: Main,
   },
-}
+};
 </script>

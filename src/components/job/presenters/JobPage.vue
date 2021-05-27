@@ -3,22 +3,22 @@
 </template>
 
 <script>
-import jobDefaults from "../../../store/jobDefaults.js";
+import jobDefaults from '../../../store/jobDefaults.js';
 const EXP_LEVEL_LIST = [
-  "Senior",
-  "Intermediate",
-  "Junior",
-  "Lead",
-  "Principal"
+  'Senior',
+  'Intermediate',
+  'Junior',
+  'Lead',
+  'Principal',
 ];
 
 const TECH_LIST = [
-  "TypeScript",
-  "JavaScript",
-  "Webpack",
-  "React.js",
-  "Node.js",
-  "Redux"
+  'TypeScript',
+  'JavaScript',
+  'Webpack',
+  'React.js',
+  'Node.js',
+  'Redux',
 ];
 
 function getJob(id, cb) {
@@ -26,10 +26,10 @@ function getJob(id, cb) {
 }
 
 export default {
-  name: "JobPage",
+  name: 'JobPage',
   data() {
     return {
-      ...jobDefaults
+      ...jobDefaults,
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -44,9 +44,9 @@ export default {
       this.job = {
         experienceLevels: EXP_LEVEL_LIST,
         techList: TECH_LIST,
-        ...job
+        ...job,
       };
-    }
-  }
+    },
+  },
 };
 </script>

@@ -91,7 +91,11 @@
 </template>
 
 <script>
-import { jobProps, EXP_LEVEL_LIST, TECH_LIST } from "../../../constants";
+import {
+  jobProps,
+  EXP_LEVEL_LIST,
+  TECH_LIST,
+} from '../../../constants';
 import {
   Input,
   InputNumber,
@@ -103,10 +107,10 @@ import {
   Col,
   Switch,
   Progress,
-} from "element-ui";
+} from 'element-ui';
 
 export default {
-  name: "JobForm",
+  name: 'JobForm',
   data() {
     return {
       experienceLevels: EXP_LEVEL_LIST,
@@ -125,15 +129,15 @@ export default {
         requiresPreInterviewTest: this.requiresPreInterviewTest,
         requiresHomework: this.requiresHomework,
       },
-      labelPosition: "left",
+      labelPosition: 'left',
     };
   },
   computed: {
     formType() {
-      if (this.type === "edit") {
-        return "Update";
+      if (this.type === 'edit') {
+        return 'Update';
       }
-      return "Create";
+      return 'Create';
     },
   },
   components: {
@@ -159,7 +163,7 @@ export default {
     },
     type: {
       validator: function (value) {
-        const options = ["create", "edit"];
+        const options = ['create', 'edit'];
         // The value must match one of these strings
         return options.indexOf(value) !== -1;
       },
@@ -168,10 +172,10 @@ export default {
   },
   methods: {
     handleSubmit(event) {
-      if (typeof event.preventDefault === "function") {
+      if (typeof event.preventDefault === 'function') {
         event.preventDefault();
       }
-      this.$emit("submit-form", {
+      this.$emit('submit-form', {
         formData: {
           ...this.form,
         },

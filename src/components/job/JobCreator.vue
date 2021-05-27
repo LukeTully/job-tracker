@@ -11,14 +11,19 @@
 </template>
 
 <script>
-import JobForm from "../../components/job/presenters/JobForm";
-import Job from "../../models/Job";
-import { EXP_LEVEL_LIST, TECH_LIST } from "../../constants";
-import defaults from "../../store/jobDefaults";
+import JobForm from '../../components/job/presenters/JobForm';
+import Job from '../../models/Job';
+import {
+  EXP_LEVEL_LIST,
+  TECH_LIST,
+} from '../../constants';
+import defaults from '../../store/jobDefaults';
 
 export default {
-  components: { JobForm },
-  name: "JobCreator",
+  components: {
+    JobForm,
+  },
+  name: 'JobCreator',
   data() {
     return {
       experienceLevels: EXP_LEVEL_LIST,
@@ -37,21 +42,23 @@ export default {
       const job = new Job(newJobData);
       const index = job.getIndex();
       // Create the new job
-      await this.$store.dispatch("SAVE_JOB", {
+      await this.$store.dispatch('SAVE_JOB', {
         ...newJobData,
         index,
       });
 
       // Refresh the whole list of jobs that has changed
-      await this.$store.dispatch("getAllJobs");
+      await this.$store.dispatch('getAllJobs');
 
       // Set the active job as the current one
-      this.$store.dispatch("setActiveJob", index);
+      this.$store.dispatch('setActiveJob', index);
 
       // Navigate to the newly added job
       this.$router.push({
-        name: "job",
-        params: { id: index },
+        name: 'job',
+        params: {
+          id: index,
+        },
       });
     },
     async getJobToEdit(id, cb) {
