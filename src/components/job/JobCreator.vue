@@ -42,7 +42,7 @@ export default {
       const job = new Job(newJobData);
       const index = job.getIndex();
       // Create the new job
-      await this.$store.dispatch('SAVE_JOB', {
+      await this.$store.dispatch('saveJob', {
         ...newJobData,
         index,
       });

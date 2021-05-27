@@ -10,8 +10,15 @@ import {
 } from '../services/index';
 import {
   errorSavingJob,
-  asdas,
 } from '../services/errors';
+
+import {
+  ADD_JOB,
+  SET_ACTIVE_JOB,
+  SET_JOBS,
+  ASSIGN_ERROR, 
+} from './mutationTypes';
+
 import Job from '../models/Job';
 
 Vue.use(Vuex);
@@ -32,16 +39,16 @@ export default new Vuex.Store({
     message: '',
   },
   mutations: {
-    saveJob(state, job) {
+    [ADD_JOB](state, job) {
       state.jobs.push(job);
     },
-    setJobs(state, jobs) {
+    [SET_JOBS](state, jobs) {
       state.jobs = jobs;
     },
-    activeJob(state, job) {
+    [SET_ACTIVE_JOB](state, job) {
       state.currentJob = job;
     },
-    error(state, err) {
+    [ASSIGN_ERROR](state, err) {
       state.message = err.message;
     },
   },
@@ -55,19 +62,18 @@ export default new Vuex.Store({
         syncJobsToLocalState(commit);
       } else {
         // Use some initial data from a static file
-        // commit('setJobs', initialData);
         initialData.forEach(job => {
-          dispatch('SAVE_JOB', job);
+          dispatch('saveJob', job);
         });
       }
     },
-    async SAVE_JOB({
+    async saveJob({
       commit, dispatch, 
     }, newJob) {
       try {
         const job = new Job(newJob);
         const jobObj = job.toObject();
-        commit('saveJob', jobObj);
+        commit(ADD_JOB, jobObj);
         create(null, jobObj);
       } catch (err) {
         dispatch('saveError', err);
@@ -92,28 +98,26 @@ export default new Vuex.Store({
     }) {
       const jobs = await all();
       jobs.map(job => new Job(job).toObject());
-      commit('setJobs', jobs);
+      commit(SET_JOBS, jobs);
     },
     async setActiveJob({
       commit, 
     }, id) {
       const job = await read(id);
-      commit('activeJob', job);
+      commit(SET_ACTIVE_JOB, job);
     },
     saveError({
       commit, 
     }, err) {
-      commit('error', err);
+      commit(ASSIGN_ERROR, err);
       errorSavingJob(err);
     },
-  },
-  modules: {
   },
 });
 
 function syncJobsToLocalState(commit) {
   // Get the items from localForage
   localForage.iterate(job => {
-    commit('saveJob', job);
+    commit(ADD_JOB, job);
   });
 }
