@@ -1,6 +1,5 @@
 <template>
   <el-form :model="form" ref="form" label-position="left" label-width="240px">
-    <el-progress :percentage="form.applied ? 100 : 0"></el-progress>
     <el-form-item label="Job Title">
       <el-input name="title" type="text" v-model="form.title" />
     </el-form-item>
