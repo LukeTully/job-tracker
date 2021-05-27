@@ -11,6 +11,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
+    "eslint-plugin-modules-newline": "^0.0.6",
     "localforage": "^1.9.0",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.12",
