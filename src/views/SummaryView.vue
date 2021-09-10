@@ -1,41 +1,35 @@
 <template>
-  <el-main>
-    <div>
-      <el-table :data="jobs" style="width: 100%">
-        <el-table-column
-          prop="title"
-          label="Title"
-          width="180"
-        ></el-table-column>
-        <el-table-column
-          prop="company"
-          label="Company"
-          width="180"
-        ></el-table-column>
-        <el-table-column prop="salaryMax" label="Max Salary"></el-table-column>
-      </el-table>
-    </div>
-  </el-main>
+  <div>
+    <el-table :data="jobs" style="width: 100%">
+      <el-table-column prop="title" label="Title" width="180"></el-table-column>
+      <el-table-column
+        prop="company"
+        label="Company"
+        width="180"
+      ></el-table-column>
+      <el-table-column prop="salaryMax" label="Max Salary"></el-table-column>
+    </el-table>
+  </div>
 </template>
 
 <script>
 import {
-  Table,
-  TableColumn,
-  Main,
-} from 'element-ui';
+    ElTable,
+    ElTableColumn,
+    ElMain,
+} from 'element-plus';
 
 export default {
-  name: 'Summary',
-  computed: {
-    jobs() {
-      return this.$store.state.jobs;
+    name: 'Summary',
+    computed: {
+        jobs() {
+            return this.$store.state.jobs;
+        },
     },
-  },
-  components: {
-    [Table.name]: Table,
-    [TableColumn.name]: TableColumn,
-    [Main.name]: Main,
-  },
+    components: {
+        [ElTable.name]: ElTable,
+        [ElTableColumn.name]: ElTableColumn,
+        [ElMain.name]: ElMain,
+    },
 };
 </script>
