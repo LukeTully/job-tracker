@@ -5,29 +5,37 @@
 </template>
 
 <script>
-import { MenuItem } from 'element-ui';
+import { ElMenuItem } from 'element-plus';
 import { jobProps } from '../../../constants';
+import { computed } from 'vue';
 
 export default {
-  name: 'JobListItem',
-  props: {
-    ...jobProps,
-  },
-  computed: {
-    status() {
-      const createdDate = this.timeCreated;
-      const currentDate = Date.now();
-      const elapsed = currentDate - createdDate;
-      const timeInWeeks = elapsed / 6.048e8;
-      if (timeInWeeks > 1.5) {
-        return 'stale';
-      }
-      return this.applied ? 'current applied' : 'current';
+    name: 'JobListItem',
+    setup(props) {
+        const status = computed(() => {
+            /*
+              Determine how long it's been since this job was added to our inventory,
+              then use this information to style our list of jobs in the backlog
+            */
+            const createdDate = props.timeCreated;
+            const currentDate = Date.now();
+            const elapsed = currentDate - createdDate;
+            const elapsedTimeInWeeks = elapsed / 6.048e8;
+            if (elapsedTimeInWeeks > 1.5) {
+                return 'stale';
+            }
+            return props.applied ? 'current applied' : 'current';
+        });
+        return {
+            status,
+        };
     },
-  },
-  components: {
-    [MenuItem.name]: MenuItem,
-  },
+    props: {
+        ...jobProps,
+    },
+    components: {
+        [ElMenuItem.name]: ElMenuItem,
+    },
 };
 </script>
 
