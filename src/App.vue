@@ -1,11 +1,9 @@
 <template>
   <div id="app">
     <el-container>
-      <JobList :jobs="jobs" />
+      <JobList :jobs="jobs"></JobList>
       <el-main>
-        <transition name="fade" mode="out-in">
-          <router-view></router-view>
-        </transition>
+        <router-view></router-view>
       </el-main>
     </el-container>
   </div>
@@ -14,44 +12,44 @@
 <script>
 import JobList from './components/job/presenters/JobList.vue';
 import {
-  Table,
-  TableColumn,
-  Main,
-  Container,
-  Button,
-} from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+    ElTable,
+    ElTableColumn,
+    ElMain,
+    ElContainer,
+    ElButton,
+} from 'element-plus';
+import 'element-plus/lib/theme-chalk/index.css';
 import {
-  TECH_LIST,
-  EXP_LEVEL_LIST,
+    TECH_LIST,
+    EXP_LEVEL_LIST,
 } from './constants';
 
 export default {
-  name: 'App',
-  data() {
-    return {
-      experienceLevels: EXP_LEVEL_LIST,
-      techList: TECH_LIST,
-    };
-  },
-  components: {
-    JobList,
-    [Table.name]: Table,
-    [TableColumn.name]: TableColumn,
-    [Main.name]: Main,
-    [Container.name]: Container,
-    [Button.name]: Button,
-  },
-  computed: {
-    jobs() {
-      return this.$store.state.jobs;
+    name: 'App',
+    data() {
+        return {
+            experienceLevels: EXP_LEVEL_LIST,
+            techList: TECH_LIST,
+        };
     },
-  },
-  created: function bacon() {
-    if (this.$store.state.jobs.length === 0) {
-      this.$store.dispatch('initJobs');
-    }
-  },
+    components: {
+        JobList,
+        [ElTable.name]: ElTable,
+        [ElTableColumn.name]: ElTableColumn,
+        [ElMain.name]: ElMain,
+        [ElContainer.name]: ElContainer,
+        [ElButton.name]: ElButton,
+    },
+    computed: {
+        jobs() {
+            return this.$store.state.jobs;
+        },
+    },
+    created: function () {
+        if (this.$store.state.jobs.length === 0) {
+            this.$store.dispatch('initJobs');
+        }
+    },
 };
 </script>
 
