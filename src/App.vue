@@ -23,13 +23,29 @@ import {
     TECH_LIST,
     EXP_LEVEL_LIST,
 } from './constants';
+import { ref } from '@vue/reactivity';
+import { computed } from '@vue/runtime-core';
+import { useStore } from 'vuex';
 
 export default {
     name: 'App',
-    data() {
+    setup() {
+        const experienceLevels = ref(EXP_LEVEL_LIST);
+        const techList = ref(TECH_LIST);
+        const store = useStore();
+        const jobs = computed(() => {
+            return store.state.jobs;
+        });
+
+        /* Initialize the jobs in our global store if none have been loaded yet */
+        if (store.state.jobs.length === 0) {
+            store.dispatch('initJobs');
+        }
+
         return {
-            experienceLevels: EXP_LEVEL_LIST,
-            techList: TECH_LIST,
+            experienceLevels,
+            techList,
+            jobs,
         };
     },
     components: {
@@ -39,16 +55,6 @@ export default {
         [ElMain.name]: ElMain,
         [ElContainer.name]: ElContainer,
         [ElButton.name]: ElButton,
-    },
-    computed: {
-        jobs() {
-            return this.$store.state.jobs;
-        },
-    },
-    created: function () {
-        if (this.$store.state.jobs.length === 0) {
-            this.$store.dispatch('initJobs');
-        }
     },
 };
 </script>
