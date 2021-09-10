@@ -18,13 +18,19 @@ import {
     ElTableColumn,
     ElMain,
 } from 'element-plus';
+import { computed } from 'vue';
 
 export default {
     name: 'Summary',
-    computed: {
-        jobs() {
+    setup() {
+        /* Get the jobsList from our vuex store */
+        const jobs = computed(() => {
             return this.$store.state.jobs;
-        },
+        });
+
+        return {
+            jobs,
+        };
     },
     components: {
         [ElTable.name]: ElTable,
