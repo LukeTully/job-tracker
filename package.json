@@ -49,35 +49,41 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "no-console": 1,
-      "no-debugger": 1,
-      "no-unused-vars": 1,
-      "semi": "error",
-      "space-before-function-paren": [
+      "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "newline-per-chained-call": [
         "error",
         {
-          "anonymous": "always",
-          "named": "never",
-          "asyncArrow": "always"
+                "ignoreChainWithDepth": 2
         }
       ],
-      "object-property-newline": "warn",
-      "modules-newline/import-declaration-newline": "warn",
-      "indent": [
-        2,
-        2
+        "linebreak-style": [
+            "error",
+            "unix"
       ],
-      "object-curly-newline": [
-        "warn",
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
         "always"
       ],
+        "no-unused-vars": "warn",
       "comma-dangle": [
         "error",
         "always-multiline"
       ],
-      "quotes": [
-        "warn",
-        "single"
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 1
+            }
       ]
     }
   },
