@@ -1,24 +1,33 @@
 <template>
-  <el-form :model="form" ref="form" label-position="left" label-width="240px">
+  <el-form
+    :model="form"
+    ref="jobFormRef"
+    :label-position="labelPosition"
+    label-width="200px"
+  >
+    <h2>{{ form.title }}</h2>
     <el-form-item label="Job Title">
-      <el-input name="title" type="text" v-model="form.title" />
+      <el-input type="text" v-model="form.title" />
     </el-form-item>
+
     <el-form-item label="Company">
       <el-input type="text" v-model="form.company" />
     </el-form-item>
     <el-form-item label="Salary Range">
       <el-col :span="11">
         <el-input-number
-          v-model="form.salaryMin"
+          v-model.number="form.salaryMin"
           :step="10000"
           :min="0"
           :max="form.salaryMax"
         ></el-input-number>
       </el-col>
-      <el-col :span="2"> - </el-col>
+      <el-col :span="2"
+        >&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;</el-col
+      >
       <el-col :span="11">
         <el-input-number
-          v-model="form.salaryMax"
+          v-model.number="form.salaryMax"
           :step="10000"
           :min="form.salaryMin"
         ></el-input-number>
@@ -62,7 +71,7 @@
     </el-form-item>
     <el-form-item label="Interview Count">
       <el-input-number
-        v-model="form.interviewCount"
+        v-model.number="form.interviewCount"
         :step="1"
         :min="0"
         :max="form.salaryMax"
@@ -91,96 +100,115 @@
 
 <script>
 import {
-  jobProps,
-  EXP_LEVEL_LIST,
-  TECH_LIST,
+    jobProps,
+    EXP_LEVEL_LIST,
+    TECH_LIST,
 } from '../../../constants';
 import {
-  Input,
-  InputNumber,
-  FormItem,
-  Form,
-  Select,
-  Option,
-  Button,
-  Col,
-  Switch,
-  Progress,
-} from 'element-ui';
+    ElInput,
+    ElInputNumber,
+    ElFormItem,
+    ElForm,
+    ElSelect,
+    ElOption,
+    ElButton,
+    ElCol,
+    ElSwitch,
+    ElProgress,
+} from 'element-plus';
+
+import {
+    ref,
+    reactive,
+    computed,
+} from 'vue';
 
 export default {
-  name: 'JobForm',
-  data() {
-    return {
-      experienceLevels: EXP_LEVEL_LIST,
-      techList: TECH_LIST,
-      form: {
-        title: this.title,
-        company: this.company,
-        salaryMin: this.salaryMin,
-        salaryMax: this.salaryMax,
-        description: this.description,
-        experienceLevel: this.experienceLevel,
-        tech: this.tech,
-        applied: this.applied,
-        interviewCount: this.interviewCount,
-        easyApply: this.easyApply,
-        requiresPreInterviewTest: this.requiresPreInterviewTest,
-        requiresHomework: this.requiresHomework,
-      },
-      labelPosition: 'left',
-    };
-  },
-  computed: {
-    formType() {
-      if (this.type === 'edit') {
-        return 'Update';
-      }
-      return 'Create';
+    name: 'JobForm',
+    setup(props, {
+        emit, 
+    }) {
+        const form = reactive({
+            title: props.title,
+            company: props.company,
+            salaryMin: props.salaryMin,
+            salaryMax: props.salaryMax,
+            description: props.description,
+            experienceLevel: props.experienceLevel,
+            tech: props.tech,
+            applied: props.applied,
+            interviewCount: props.interviewCount,
+            easyApply: props.easyApply,
+            requiresPreInterviewTest: props.requiresPreInterviewTest,
+            requiresHomework: props.requiresHomework,
+        });
+
+        const jobFormRef = ref();
+
+        /* Default form select element value initializers */
+        const experienceLevels = ref(EXP_LEVEL_LIST);
+        const techList = ref(TECH_LIST);
+        const labelPosition = ref('left');
+
+        /* Computer properties */
+        const formType = computed(() => {
+            if (props.type === 'edit') {
+                return 'Update';
+            }
+            return 'Create';
+        });
+
+        const handleSubmit = (event) => {
+            if (typeof event.preventDefault === 'function') {
+                event.preventDefault();
+            }
+            emit('submit-form', {
+                formData: {
+                    ...form,
+                },
+            });
+        };
+
+        return {
+            form,
+            jobFormRef,
+            experienceLevels,
+            techList,
+            labelPosition,
+            formType,
+            handleSubmit,
+        };
     },
-  },
-  components: {
-    [Input.name]: Input,
-    [FormItem.name]: FormItem,
-    [Form.name]: Form,
-    [Select.name]: Select,
-    [Option.name]: Option,
-    [Button.name]: Button,
-    [Col.name]: Col,
-    [InputNumber.name]: InputNumber,
-    [Switch.name]: Switch,
-    [Progress.name]: Progress,
-  },
-  props: {
-    salaryMin: {
-      type: Number,
-      default: 0,
+    components: {
+        [ElInput.name]: ElInput,
+        [ElFormItem.name]: ElFormItem,
+        [ElForm.name]: ElForm,
+        [ElSelect.name]: ElSelect,
+        [ElOption.name]: ElOption,
+        [ElButton.name]: ElButton,
+        [ElCol.name]: ElCol,
+        [ElInputNumber.name]: ElInputNumber,
+        [ElSwitch.name]: ElSwitch,
+        [ElProgress.name]: ElProgress,
     },
-    salaryMax: {
-      type: Number,
-      default: 100000,
-    },
-    type: {
-      validator: function (value) {
-        const options = ['create', 'edit'];
-        // The value must match one of these strings
-        return options.indexOf(value) !== -1;
-      },
-    },
-    ...jobProps,
-  },
-  methods: {
-    handleSubmit(event) {
-      if (typeof event.preventDefault === 'function') {
-        event.preventDefault();
-      }
-      this.$emit('submit-form', {
-        formData: {
-          ...this.form,
+    props: {
+        salaryMin: {
+            type: Number,
+            default: 0,
         },
-      });
+        salaryMax: {
+            type: Number,
+            default: 100000,
+        },
+        type: {
+            validator: function (value) {
+                const options = ['create', 'edit'];
+                // The value must match one of these strings
+                return options.indexOf(value) !== -1;
+            },
+        },
+        ...jobProps,
     },
-  },
 };
 </script>
 
