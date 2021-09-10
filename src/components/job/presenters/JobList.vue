@@ -17,21 +17,26 @@
 </template>
 
 <script>
-import { Aside, MenuItem, Menu, Button } from "element-ui";
-import JobListItem from "./JobListItem";
+import {
+    ElAside,
+    ElMenuItem,
+    ElMenu,
+    ElButton,
+} from 'element-plus';
+import JobListItem from './JobListItem';
 
 export default {
-  name: "JobList",
-  props: {
-    jobs: Array,
-  },
-  components: {
-    [Aside.name]: Aside,
-    [MenuItem.name]: MenuItem,
-    [Menu.name]: Menu,
-    [Button.name]: Button,
-    JobListItem,
-  },
+    name: 'JobList',
+    props: {
+        jobs: Array,
+    },
+    components: {
+        [ElAside.name]: ElAside,
+        [ElMenuItem.name]: ElMenuItem,
+        [ElMenu.name]: ElMenu,
+        [ElButton.name]: ElButton,
+        JobListItem,
+    },
 };
 </script>
 
