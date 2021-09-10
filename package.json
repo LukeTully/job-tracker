@@ -9,9 +9,12 @@
     "serve-prod": "npm run build && serve -s dist"
   },
   "dependencies": {
+    "@vue/compat": "^3.1.4",
     "core-js": "^3.6.5",
-    "element-ui": "^2.13.2",
+    "element-plus": "^1.0.2-beta.71",
+    "element-ui": "^2.15.6",
     "eslint-plugin-modules-newline": "^0.0.6",
+    "http-parser-js": "^0.5.3",
     "localforage": "^1.9.0",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.12",
@@ -19,19 +22,19 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.11",
-    "@vue/cli-plugin-eslint": "~4.5.11",
-    "@vue/cli-plugin-pwa": "~4.5.11",
-    "@vue/cli-plugin-vuex": "~4.5.11",
-    "@vue/cli-service": "~4.5.11",
+    "@vue/cli-plugin-babel": "~4.5.13",
+    "@vue/cli-plugin-eslint": "~4.5.13",
+    "@vue/cli-plugin-pwa": "~4.5.13",
+    "@vue/cli-plugin-vuex": "~4.5.13",
+    "@vue/cli-service": "~4.5.13",
+    "@vue/compiler-sfc": "^3.1.4",
     "@vue/eslint-config-prettier": "^6.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint-plugin-vue": "^7.0.0",
     "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.11"
+    "sass-loader": "^8.0.2"
   },
   "eslintConfig": {
     "root": true,
@@ -57,34 +60,34 @@
             }
         ],
         "newline-per-chained-call": [
-        "error",
-        {
+            "error",
+            {
                 "ignoreChainWithDepth": 2
-        }
-      ],
+            }
+        ],
         "linebreak-style": [
             "error",
             "unix"
-      ],
+        ],
         "quotes": [
             "error",
             "single"
         ],
         "semi": [
             "error",
-        "always"
-      ],
+            "always"
+        ],
         "no-unused-vars": "warn",
-      "comma-dangle": [
-        "error",
-        "always-multiline"
-      ],
+        "comma-dangle": [
+            "error",
+            "always-multiline"
+        ],
         "no-multiple-empty-lines": [
             "error",
             {
                 "max": 1
             }
-      ]
+        ]
     }
   },
   "browserslist": [
