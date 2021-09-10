@@ -26,106 +26,106 @@
 import jobDefaults from '../store/jobDefaults.js';
 import store from '../store/index.js';
 import {
-  Button,
-  Table,
-  TableColumn,
-  Main,
-  Tag,
-  Progress,
-} from 'element-ui';
+    ElButton,
+    ElTable,
+    ElTableColumn,
+    ElMain,
+    ElTag,
+    ElProgress,
+} from 'element-plus';
 import {
-  jobPropLabels,
-  EXP_LEVEL_LIST,
-  TECH_LIST,
+    jobPropLabels,
+    EXP_LEVEL_LIST,
+    TECH_LIST,
 } from '../constants';
 
 export default {
-  name: 'JobDetailsView',
-  data() {
-    return {
-      job: jobDefaults,
-      loaded: false,
-    };
-  },
-  computed: {
-    stats() {
-      const tableKeys = [
-        'salaryMin',
-        'salaryMax',
-        'experienceLevel',
-        'applied',
-        'interviewCount',
-        'easyApply',
-        'requiresPreInterviewTest',
-        'requiresHomework',
-        'timeCreated',
-        'timeEdited',
-      ];
-      const table = [];
-      tableKeys.forEach((tableKey) => {
-        if (this.job[tableKey] != undefined) {
-          table.push({
-            attribute: jobPropLabels[tableKey],
-            val: this.job[tableKey].toString(),
-          });
-        }
-      });
-      return table;
+    name: 'JobDetailsView',
+    data() {
+        return {
+            job: jobDefaults,
+            loaded: false,
+        };
     },
-    percentageComplete() {
-      const {
-        applied,
-      } = this.job;
-      if (applied) {
-        return 100;
-      }
-      return 0;
+    computed: {
+        stats() {
+            const tableKeys = [
+                'salaryMin',
+                'salaryMax',
+                'experienceLevel',
+                'applied',
+                'interviewCount',
+                'easyApply',
+                'requiresPreInterviewTest',
+                'requiresHomework',
+                'timeCreated',
+                'timeEdited',
+            ];
+            const table = [];
+            tableKeys.forEach((tableKey) => {
+                if (this.job[tableKey] != undefined) {
+                    table.push({
+                        attribute: jobPropLabels[tableKey],
+                        val: this.job[tableKey].toString(),
+                    });
+                }
+            });
+            return table;
+        },
+        percentageComplete() {
+            const {
+                applied,
+            } = this.job;
+            if (applied) {
+                return 100;
+            }
+            return 0;
+        },
     },
-  },
-  created() {
-    this.setData(this.$store.state.currentJob);
-  },
-  beforeRouteEnter(to, from, next) {
-    next(async (vm) => {
-      await store.dispatch('setActiveJob', to.params.id);
-      vm.setData({
-        ...store.state.currentJob,
-      });
-    });
-  },
-  beforeRouteUpdate(to, from, next) {
-    store.dispatch('setActiveJob', to.params.id).then(() => {
-      this.setData(this.$store.state.currentJob);
-      next();
-    }); // handle the error here
-  },
-  watch: {
-    job() {
-      const duration = 0.2; // In seconds
-      this.loaded = false;
-      window.setTimeout(() => {
-        this.loaded = true;
-      }, duration * 1000);
+    created() {
+        this.setData(this.$store.state.currentJob);
     },
-  },
-  components: {
-    [Button.name]: Button,
-    [Table.name]: Table,
-    [TableColumn.name]: TableColumn,
-    [Main.name]: Main,
-    [Tag.name]: Tag,
-    [Progress.name]: Progress,
-  },
-  methods: {
-    setData(job) {
-      this.job = {
-        experienceLevels: EXP_LEVEL_LIST,
-        techList: TECH_LIST,
-        ...job,
-      };
-      this.loaded = true;
+    beforeRouteEnter(to, from, next) {
+        next(async (vm) => {
+            await store.dispatch('setActiveJob', to.params.id);
+            vm.setData({
+                ...store.state.currentJob,
+            });
+        });
     },
-  },
+    beforeRouteUpdate(to, from, next) {
+        store.dispatch('setActiveJob', to.params.id).then(() => {
+            this.setData(this.$store.state.currentJob);
+            next();
+        }); // handle the error here
+    },
+    watch: {
+        job() {
+            const duration = 0.2; // In seconds
+            this.loaded = false;
+            window.setTimeout(() => {
+                this.loaded = true;
+            }, duration * 1000);
+        },
+    },
+    components: {
+        [ElButton.name]: ElButton,
+        [ElTable.name]: ElTable,
+        [ElTableColumn.name]: ElTableColumn,
+        [ElMain.name]: ElMain,
+        [ElTag.name]: ElTag,
+        [ElProgress.name]: ElProgress,
+    },
+    methods: {
+        setData(job) {
+            this.job = {
+                experienceLevels: EXP_LEVEL_LIST,
+                techList: TECH_LIST,
+                ...job,
+            };
+            this.loaded = true;
+        },
+    },
 };
 </script>
 <style>
