@@ -49,9 +49,7 @@ export default {
         });
     
         function setJobData () {
-            futureJob.value = {
-                ...store.state.currentJob, 
-            };
+            Object.assign(futureJob, store.state.currentJob);
         }
 
         async function submitJob(event) {
@@ -94,8 +92,8 @@ export default {
             type: Object,
         },
         id: {
-            type: Number,
-            default: 0,
+            type: String,
+            default: '',
         },
     },
     beforeRouteEnter(to, from, next) {
