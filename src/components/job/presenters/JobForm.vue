@@ -1,42 +1,47 @@
 <template>
   <el-form
     :model="form"
+    :rules="formRules"
     ref="jobFormRef"
     :label-position="labelPosition"
     label-width="200px"
   >
     <h2>{{ form.title }}</h2>
-    <el-form-item label="Job Title">
-      <el-input type="text" v-model="form.title" />
+    <el-form-item label="Job Title" prop="title">
+      <el-input name="title" type="text" v-model="form.title" />
     </el-form-item>
 
-    <el-form-item label="Company">
+    <el-form-item label="Company" prop="company">
       <el-input type="text" v-model="form.company" />
     </el-form-item>
     <el-form-item label="Salary Range">
       <el-col :span="11">
-        <el-input-number
+        <el-form-item prop="salaryMin">
+          <el-input-number
           v-model.number="form.salaryMin"
           :step="10000"
           :min="0"
           :max="form.salaryMax"
         ></el-input-number>
+        </el-form-item>
       </el-col>
       <el-col :span="2"
         >&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;</el-col
       >
       <el-col :span="11">
-        <el-input-number
+        <el-form-item prop="salaryMax">
+          <el-input-number
           v-model.number="form.salaryMax"
           :step="10000"
           :min="form.salaryMin"
         ></el-input-number>
+        </el-form-item>
       </el-col>
     </el-form-item>
-    <el-form-item label="Description">
+    <el-form-item label="Description" prop="description">
       <el-input type="textarea" v-model="form.description"></el-input>
     </el-form-item>
-    <el-form-item label="Tech Experience">
+    <el-form-item label="Tech Experience" prop="experienceLevel">
       <el-select
         placeholder="Select level"
         v-model="form.experienceLevel"
@@ -169,8 +174,31 @@ export default {
             });
         };
 
+        const formRules = ref({
+            title: [
+                { required: true, message: 'Please input a title for this job', trigger: 'blur' },
+                { min: 1, max: 150, message: 'Length should be 1 to 150', trigger: 'blur' },
+            ],
+            company: [
+                { required: true, message: 'Please enter the company name that posted this job.', trigger: 'change' },
+            ],
+            salaryMin: [
+                { type: 'number', message: 'Please enter a number that represents the lower salary range for this job, if one was indicated.', trigger: 'blur' },
+            ],
+            salaryMax: [
+                { type: 'date', message: 'Please enter a number that represents the upper salary range for this job, if one was indicated.', trigger: 'blur' },
+            ],
+            description: [
+                { required: true, message: 'Add the body of the job posting here.', trigger: 'blur' },
+            ],
+            experienceLevel: [
+                { type: 'array', required: true, message: 'Select a technical skill level that applies to this job', trigger: 'blur' },
+            ],
+        });
+
         return {
             form,
+            formRules,
             jobFormRef,
             experienceLevels,
             techList,
